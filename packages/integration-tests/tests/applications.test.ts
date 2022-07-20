@@ -10,15 +10,7 @@ const testApplication = {
 };
 
 describe('admin console application', () => {
-  it('should get application list with demo app', async () => {
-    const applications = await authedAdminApi.get('applications').json<Application[]>();
-
-    expect(applications.length).not.toBeLessThan(1);
-    const hasDemoApp = applications.some((app) => app.id === demoAppApplicationId);
-    expect(hasDemoApp).toBeTruthy();
-  });
-
-  it('should get demo app details', async () => {
+  it('should get demo app details successfully', async () => {
     const demoApp = await authedAdminApi
       .get(`applications/${demoAppApplicationId}`)
       .json<Application>();
@@ -26,7 +18,7 @@ describe('admin console application', () => {
     expect(demoApp.id).toBe(demoAppApplicationId);
   });
 
-  it('should create application', async () => {
+  it('should create application successfully', async () => {
     const application = await authedAdminApi
       .post('applications', {
         json: { name: testApplication.name, type: testApplication.type },
@@ -44,7 +36,7 @@ describe('admin console application', () => {
     expect(applications.some((app) => app.id === application.id)).toBeTruthy();
   });
 
-  it('should update application details', async () => {
+  it('should update application details successfully', async () => {
     expect(testApplication.id).toBeTruthy();
 
     const application = await authedAdminApi
@@ -76,7 +68,7 @@ describe('admin console application', () => {
     expect(updatedApplication.oidcClientMetadata.redirectUris).toEqual(newRedirectUris);
   });
 
-  it('should delete application', async () => {
+  it('should delete application successfully', async () => {
     expect(testApplication.id).toBeTruthy();
 
     await authedAdminApi.delete(`applications/${testApplication.id}`);
