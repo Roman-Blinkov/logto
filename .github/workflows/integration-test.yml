@@ -75,7 +75,7 @@ jobs:
           pg_ctl -D /usr/local/var/postgres start
           psql postgres -c "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';"
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: integration-test-${{ github.sha }}
 
